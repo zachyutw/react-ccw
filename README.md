@@ -16,3 +16,14 @@
 -   [x] setup router
 -   [x] build single page
 -   [x] build list page
+
+# Time
+
+-   First Commit
+
+    -   Date: Thu Jan 7 09:51:36 2021 +0800
+    -   Initialize project using Create React App
+
+-   Basic Requirements Complete
+    -   Date: Thu Jan 7 14:21:29 2021 +0800
+    -   update readme
