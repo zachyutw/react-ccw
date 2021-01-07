@@ -13,3 +13,5 @@
 -   [] setup redux store
 -   [] setup apis
 -   [] setup router
+-   [] build single page
+-   [] build list page
