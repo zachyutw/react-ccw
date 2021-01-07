@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 
-const useScrollToBottom: (offset: number) => boolean = (offsetY = 0) => {
+/**
+ *
+ * @param offsetY detected early px to reach the bottom
+ * @returns {boolean} detected that has window scrolled to bottom or not
+ */
+const useScrollToBottom: (offset?: number) => boolean = (offsetY = 0) => {
     const [isWindowBottom, setIsWindowBottom] = useState(false);
     useEffect(() => {
         const detectBottom = () => {

@@ -7,9 +7,7 @@ import GoBackHeader from '../../components/Header/GoBackHeader';
 import AssetCoverCard from '../../components/Asset/AssetCoverCard';
 import styled from 'styled-components';
 
-const AssetCover = styled.div`
-    margin: 2rem 0;
-`;
+const AssetCover = styled.div``;
 
 const Page = (props: RouteComponentProps) => {
     const {
@@ -26,11 +24,10 @@ const Page = (props: RouteComponentProps) => {
     return (
         <div>
             <GoBackHeader title={asset.collection.name} />
-            <Container>
-                <AssetCover>
-                    <AssetCoverCard item={asset} />
-                </AssetCover>
-            </Container>
+
+            <AssetCover>
+                <AssetCoverCard item={asset} />
+            </AssetCover>
         </div>
     );
 };

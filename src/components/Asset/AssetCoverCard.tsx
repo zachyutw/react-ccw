@@ -32,7 +32,11 @@ const AssetCoverCard = (props: AssetCardProps) => {
                 <Typography gutterBottom variant='h5' component='h2'>
                     {name}
                 </Typography>
-                <Typography variant='body2' color='textSecondary' component='p'>
+                <Typography
+                    title={description}
+                    variant='body2'
+                    color='textSecondary'
+                    component='p'>
                     {description}
                 </Typography>
             </CardContent>
