@@ -1,10 +1,11 @@
 # Basic Requirements
 
--   [] There are two pages: list page and detail page. Use client side
-    navigation to switch between different pages.
--   [] You can use any frontend framework you like (react, vue, angular, ...).
--   [] Use any library when you see fit. There's no point reinventing the wheel.
--   [] Do not spend too much time on this project. Spend 2-4 hours.
+-   [x] There are two pages: list page and detail page. Use client side
+        navigation to switch between different pages.
+-   [x] You can use any frontend framework you like (react, vue, angular, ...).
+-   [x] Use any library when you see fit. There's no point reinventing the
+        wheel.
+-   [x] Do not spend too much time on this project. Spend 2-4 hours.
 
 # Plan
 
