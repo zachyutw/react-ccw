@@ -1,19 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 import thunkDispatcher from '../thunkDispatcher';
-import { fetchAssetsList, Asset } from '../../apis/openseaApi';
+import { fetchAssetObject, Asset } from '../../apis/openseaApi';
 import { BasicState } from './types';
-const NAME = 'assets';
+const NAME = 'asset';
 
 type AssetsState = {
-    data: Asset[];
-    params: { offset: number };
+    data: Asset;
+    params: { contract_address?: string; token_id?: string };
 };
 
 const initialState: AssetsState & BasicState = {
-    data: [],
+    data: { collection: {}, asset_contract: {} },
     isLoading: false,
     error: {},
-    params: { offset: 0 },
+    params: {},
 };
 
 const slice = createSlice({
@@ -22,6 +22,7 @@ const slice = createSlice({
     reducers: {
         loading(state) {
             state.isLoading = true;
+            state.data = initialState.data;
         },
         receivedData(state, action) {
             state.data = action.payload;
@@ -34,32 +35,18 @@ const slice = createSlice({
         setQuery(state, action) {
             state.params = action.payload;
         },
-        concatData(state, action) {
-            state.data = state.data.concat(action.payload);
-            state.isLoading = false;
-        },
     },
 });
 
-const { loading, fail, receivedData, concatData } = slice.actions;
+const { loading, fail, receivedData } = slice.actions;
 
 export const { setQuery } = slice.actions;
 
-export const loadAssets = (params: any) => (dispatch: () => void) => {
+export const loadAsset = (params: any) => (dispatch: () => void) => {
     thunkDispatcher({
-        promise: fetchAssetsList(params),
+        promise: fetchAssetObject(params),
         dispatch,
         success: receivedData,
-        loading,
-        fail,
-    });
-};
-
-export const loadMoreAssets = (params: any) => (dispatch: () => void) => {
-    thunkDispatcher({
-        promise: fetchAssetsList(params),
-        dispatch,
-        success: concatData,
         loading,
         fail,
     });

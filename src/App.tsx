@@ -1,14 +1,7 @@
-import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { fetchAssetsList, fetchAssetObject } from './apis/openseaApi';
+
 function App() {
-    useEffect(() => {
-        fetchAssetsList({ offset: 0 }).then((data) => console.log(data));
-        fetchAssetObject({ token_id: '556324' }).then((data) =>
-            console.log(data)
-        );
-    }, []);
     return (
         <div className='App'>
             <header className='App-header'>

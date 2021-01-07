@@ -20,6 +20,7 @@ const useScrollToBottom: (offset: number) => boolean = (offsetY = 0) => {
         return () => {
             window.removeEventListener('scroll', detectBottom);
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return isWindowBottom;

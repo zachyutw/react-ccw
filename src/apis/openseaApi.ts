@@ -11,22 +11,23 @@ export type FetchAssetsListParams = {
     limit: number;
 };
 
-export type FetchAssetsListRespData = {
-    image_url: string;
-    token_id: string;
-    name: string;
+export type Asset = {
+    image_url?: string;
+    token_id?: string;
+    name?: string;
     collection: {
-        name: string;
+        name?: string;
     };
     asset_contract: {
-        address: string;
+        address?: string;
     };
-    description: string;
-    permalink: string;
+    description?: string;
+    permalink?: string;
 };
 
-export type fetchAssetObjectProp = {
+export type FetchAssetObjectProp = {
     token_id: string;
+    contract_address: string;
 };
 
 export const fetchAssetsList = async (props: FetchAssetsListProp) => {
@@ -38,7 +39,7 @@ export const fetchAssetsList = async (props: FetchAssetsListProp) => {
         owner: '0x960DE9907A2e2f5363646d48D7FB675Cd2892e91',
     };
 
-    const resp: FetchAssetsListRespData[] = await axios
+    const resp: Asset[] = await axios
         .get('https://api.opensea.io/api/v1/assets/', { params })
         .then((result) =>
             result.data.assets.map(
@@ -53,8 +54,8 @@ export const fetchAssetsList = async (props: FetchAssetsListProp) => {
                 }: any) => ({
                     image_url,
                     name,
-                    collection: { name: collection.name },
-                    asset_contract: { address: asset_contract.address },
+                    collection: { name: collection.name || null },
+                    asset_contract: { address: asset_contract.address || null },
                     description,
                     permalink,
                     token_id,
@@ -65,11 +66,11 @@ export const fetchAssetsList = async (props: FetchAssetsListProp) => {
     return resp;
 };
 
-export const fetchAssetObject = async (props: fetchAssetObjectProp) => {
-    const { token_id } = props;
+export const fetchAssetObject = async (props: FetchAssetObjectProp) => {
+    const { token_id, contract_address } = props;
     const resp = await axios
         .get(
-            `https://api.opensea.io/api/v1/asset/0x06012c8cf97bead5deae237070f9587f8e7a266d/${token_id}`
+            `https://api.opensea.io/api/v1/asset/${contract_address}/${token_id}`
         )
         .then((result) => result.data);
     return resp;

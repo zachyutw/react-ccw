@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { useEffect } from 'react';
 import styled from 'styled-components';
+import { Container } from '@material-ui/core';
+
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import {
     loadAssets,
@@ -9,7 +10,6 @@ import {
 } from '../../redux/slices/assetsSlice';
 import AssetCard from '../../components/Asset/AssetCard';
 import useScrollToBottom from '../../utils/useScrollToBottom';
-// import { fetchAssetsList } from '../../apis/openseaApi';
 
 const AssetsList = styled.div`
     display: flex;
@@ -19,11 +19,14 @@ const AssetsList = styled.div`
         width: 50%;
         box-sizing: border-box;
         padding: 24px;
+        @media only screen and (max-width: 480px) {
+            width: 100%;
+        }
         /* flex: 1 1 50%; */
     }
 `;
 
-const Page = (props: RouteComponentProps) => {
+const Page = () => {
     const isWindowBottom = useScrollToBottom(150);
     const dispatch = useAppDispatch();
     const assets = useAppSelector((state) => state.assets.data);
@@ -31,7 +34,7 @@ const Page = (props: RouteComponentProps) => {
 
     useEffect(() => {
         dispatch<any>(loadAssets({ offset: 0 }));
-        // fetchAssetsList({ offset: 0 }).then((data) => console.log(data));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
@@ -42,13 +45,15 @@ const Page = (props: RouteComponentProps) => {
     }, [isWindowBottom, params.offset, dispatch]);
     return (
         <div>
-            <AssetsList>
-                {assets.map((asset, index) => (
-                    <div key={index}>
-                        <AssetCard item={asset} />
-                    </div>
-                ))}
-            </AssetsList>
+            <Container>
+                <AssetsList>
+                    {assets.map((asset, index) => (
+                        <div key={index}>
+                            <AssetCard item={asset} />
+                        </div>
+                    ))}
+                </AssetsList>
+            </Container>
         </div>
     );
 };

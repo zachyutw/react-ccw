@@ -1,27 +1,28 @@
 import styled from 'styled-components';
+import {
+    Card,
+    CardActionArea,
+    CardMedia,
+    CardContent,
+    Typography,
+} from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { FetchAssetsListRespData } from '../../apis/openseaApi';
 
-const StyledAssetCard = styled.div`
-    border: 1px solid #000;
-    padding: 14px;
+import { Asset } from '../../apis/openseaApi';
+
+const StyledAssetCard = styled(Card)`
     a {
         text-decoration: none;
         color: #000;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
     }
-    img {
-        width: 100%;
+    .MuiCardMedia-root {
         height: 20vh;
-        object-fit: cover;
+        min-height: 20vh;
     }
 `;
 
 type AssetCardProps = {
-    item: FetchAssetsListRespData;
+    item: Asset;
 };
 
 const AssetCard = (props: AssetCardProps) => {
@@ -36,8 +37,14 @@ const AssetCard = (props: AssetCardProps) => {
     return (
         <StyledAssetCard>
             <Link to={`/asset/${address}/${token_id}`}>
-                <img src={image_url} alt='asset' />
-                <p>{name}</p>
+                <CardActionArea>
+                    <CardMedia image={image_url} title={name} />
+                    <CardContent>
+                        <Typography gutterBottom variant='h5' component='h2'>
+                            {name}
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
             </Link>
         </StyledAssetCard>
     );
