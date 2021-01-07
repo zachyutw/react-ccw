@@ -12,6 +12,6 @@
 -   [x] install dependencies
 -   [x] setup apis
 -   [] setup redux store
--   [] setup router
+-   [x] setup router
 -   [] build single page
 -   [] build list page

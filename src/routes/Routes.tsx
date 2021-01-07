@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
 const AssetsListPage = React.lazy(
     () => import('../containers/pages/AssetsListPage')
 );
@@ -15,12 +15,14 @@ export const assetRoute = {
 };
 const Routes = () => {
     return (
-        <Switch>
-            <Suspense fallback={<div>Loading...</div>}>
-                <Route {...assetRoute} component={AssetDetailPage} />
-                <Route exact {...homeRoute} component={AssetsListPage} />
-            </Suspense>
-        </Switch>
+        <BrowserRouter>
+            <Switch>
+                <Suspense fallback={<div>Loading...</div>}>
+                    <Route {...assetRoute} component={AssetDetailPage} />
+                    <Route exact {...homeRoute} component={AssetsListPage} />
+                </Suspense>
+            </Switch>
+        </BrowserRouter>
     );
 };
 export default Routes;

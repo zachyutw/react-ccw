@@ -1,28 +1,31 @@
 import axios from 'axios';
 
-type FetchAssetsListProp = {
+export type FetchAssetsListProp = {
     offset: number;
 };
 
-type FetchAssetsListParams = {
+export type FetchAssetsListParams = {
     format: 'json';
     owner: string;
     offset: number;
     limit: number;
 };
 
-type FetchAssetsListRespData = {
+export type FetchAssetsListRespData = {
     image_url: string;
     token_id: string;
     name: string;
     collection: {
         name: string;
     };
+    asset_contract: {
+        address: string;
+    };
     description: string;
     permalink: string;
 };
 
-type fetchAssetObjectProp = {
+export type fetchAssetObjectProp = {
     token_id: string;
 };
 
@@ -46,10 +49,12 @@ export const fetchAssetsList = async (props: FetchAssetsListProp) => {
                     description,
                     permalink,
                     token_id,
+                    asset_contract,
                 }: any) => ({
                     image_url,
                     name,
                     collection: { name: collection.name },
+                    asset_contract: { address: asset_contract.address },
                     description,
                     permalink,
                     token_id,
